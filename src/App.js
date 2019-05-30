@@ -1,13 +1,16 @@
 import React from 'react';
-import CategorieItem from './vb1';
+import CategorieList,{Categorie} from './vb2';
 
 
 function App()  {
+  //Categorie is gedefinieerd in vb2.js
+  const categorieen = [
+    new Categorie("PL", "Programmeertalen"),
+    new Categorie("OS", "Besturingssystemen"),
+    new Categorie("DB", "Databanken")
+  ];
   return (
-      //HTML tags(div) met een kleine letter, JSX componenten met een hoofdletter
-      <div className="list-group">
-        <CategorieItem categorieId="PL" categorieNaam="Programmeertalen"/>
-      </div>
+      <CategorieList categorieen={categorieen}/>
     );
 }
 
