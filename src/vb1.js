@@ -1,20 +1,35 @@
-import React from 'react';
+// (1)
+//import React, { PureComponent } from 'react';
+// (2)
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// Een JSX-component die alleen een render()-functie nodig heeft
-// kan ook als function gedefinieerd worden.
-// Dit is een voorbeeld van een stateless component
-export default function CategorieItem(props) {
-    // Een style moet als object gedeclareerd worden
-    // CSS-namen worden omgezet naar 'camelCase'
-    const ddStyle = { marginLeft: '16px' }
-    return (
-        <div className="list-group-item">
-            <dt>{props.categorieId}</dt>
-            {/* We hadden natuurlijk ook className="ml-3" kunnen gebruiken*/}
-            <dd style={ddStyle}>{props.categorieNaam}</dd>
-        </div>
-    );
+// (1)
+/*
+ * PureComponent controleert of de component gewijzigd is
+ */
+//export default class CategorieItem extends PureComponent {
+// (2)
+export default class CategorieItem extends Component {
+    componentDidMount(){
+        console.log(`CategorieItem is geladen: ${this.props.categorieId}`);
+      }
+      componentWillUnmount(){
+        console.log("CategorieItem wordt ontladen");
+      }
+      componentDidUpdate(){
+        console.log(`CategorieItem is geüpdated: ${this.props.categorieId}`);
+      }
+    
+    render() {
+        const ddStyle = { marginLeft: '16px' }
+        return (
+            <div className="list-group-item">
+                <dt>{this.props.categorieId}</dt>
+                <dd style={ddStyle}>{this.props.categorieNaam}</dd>
+            </div>
+        );
+    }
 }
 CategorieItem.propTypes = {
     categorieId: PropTypes.string.isRequired,
