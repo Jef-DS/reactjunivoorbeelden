@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       categorieen: []
     }
+    //omdat we geen arrow functie hebben gebruikt, moeten we 'this' koppelen aan de functie
     this.intervalID = setInterval(this.aanpassen.bind(this), 5000);
   }
   aanpassen() {
