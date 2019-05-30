@@ -20,7 +20,9 @@ class App extends Component {
     const numitems = this.state.categorieen.length;
 
     this.setState({ categorieen: this.state.categorieen.concat(App.categorieen[numitems]) });
-    //dit werkt niet omdat setState asynchroon wordt uitgevoerd
+    //dit werkt alleen omdat de functie wordt aangeroepen via setInterval
+    //normaal is this.setState() asynchroon. Iets met this.state doen na this.setState()
+    //is een antipattern. 
     if (this.state.categorieen.length === App.categorieen.length){ 
       clearInterval(this.intervalID)
     }
