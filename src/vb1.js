@@ -1,16 +1,16 @@
 // (1)
-//import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 // (2)
-import React, {Component} from 'react';
+//import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // (1)
 /*
  * PureComponent controleert of de component gewijzigd is
  */
-//export default class CategorieItem extends PureComponent {
+export default class CategorieItem extends PureComponent {
 // (2)
-export default class CategorieItem extends Component {
+//export default class CategorieItem extends Component {
     componentDidMount(){
         console.log(`CategorieItem is geladen: ${this.props.categorieId}`);
       }

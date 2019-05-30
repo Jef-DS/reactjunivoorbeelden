@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CategorieList, { Categorie } from './vb2';
+import CategorieList, { Categorie } from './vb4';
 
 
 class App extends Component {
@@ -11,22 +11,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorieen: []
+      categorieen: [],
+      enabled: true
     }
-    //omdat we geen arrow functie hebben gebruikt, moeten we 'this' koppelen aan de functie
-    this.intervalID = setInterval(this.aanpassen.bind(this), 5000);
   }
-  aanpassen() {
+  aanpassen = () => {
     console.log("Lijst wordt aangepast");
     const numitems = this.state.categorieen.length;
 
     this.setState({ categorieen: this.state.categorieen.concat(App.categorieen[numitems]) });
-    //dit werkt alleen omdat de functie wordt aangeroepen via setInterval
-    //normaal is this.setState() asynchroon. Iets met this.state doen na this.setState()
-    //is een antipattern. 
+    //dit werkt niet meer omdat this.state.categorieen nog niet is aangepast. 
     if (this.state.categorieen.length === App.categorieen.length){ 
-      clearInterval(this.intervalID)
+     this.setState({enabled: false});
     }
+    //dit werkt, maar dat is niet altijd het geval. Tweemaal de state aanpassen in 1 functie
+    //is ook een antipattern
+    //if (numitems === App.categorieen.length-1){
+    //  this.setState({enabled: false});
+    //}
+    //Dit is de beste oplossing
+    //this.setState({ 
+    //  categorieen: this.state.categorieen.concat(App.categorieen[numitems]),
+    //  enabled: numitems < App.categorieen.length-1
+    // });
   }
   componentDidMount() {
     console.log("App is geladen");
@@ -40,7 +47,7 @@ class App extends Component {
   render() {
 
     return (
-      <CategorieList categorieen={this.state.categorieen} />
+      <CategorieList categorieen={this.state.categorieen} handler={this.aanpassen} buttonEnabled={this.state.enabled} />
     );
   }
 }
