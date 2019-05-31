@@ -27,8 +27,10 @@ class App extends Component {
   componentDidUpdate() {
     console.log("App is geüpdated");
   }
+  // gewijzigde data 'vloeit' terug naar hier
   handleSubmit= (id, naam) => {
     alert(`id=${id}, naam=${naam}`);
+    // reset inputvelden
     this.setState({initialId:'', initialNaam:''});
   }
   render() {

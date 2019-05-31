@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 class TekstInputVeld extends Component {
     componentDidMount() {
         console.log(`TekstInputVeld ${this.props.item.naam} is geladen`);
-      }
-      componentWillUnmount() {
+    }
+    componentWillUnmount() {
         console.log(`TekstInputVeld ${this.props.item.naam} wordt ontladen`);
-      }
-      componentDidUpdate() {
+    }
+    componentDidUpdate() {
         console.log(`TekstInputVeld ${this.props.item.naam} is geüpdated`);
-      }
+    }
+    //behandelt lokale wijzigingen door ze te versturen naar de parentform
     handleChange = (event) => {
         this.props.onChange(event.target.name, event.target.value);
     }
@@ -39,29 +40,31 @@ export default class CategorieForm extends Component {
     }
     componentDidMount() {
         console.log("CategorieForm is geladen");
-      }
-      componentWillUnmount() {
-        console.log("CategorieForm wordt ontladen");
-      }
-      componentDidUpdate() {
-        console.log("CategorieForm is geüpdated");
-      }
-    handleChange = (naam, waarde) => {
-        console.log(`updating ${naam}: ${waarde}`);
-        this.setState({[naam]: waarde}, () => console.log(this.state));
     }
-    handleSubmit= (event) => {
+    componentWillUnmount() {
+        console.log("CategorieForm wordt ontladen");
+    }
+    componentDidUpdate() {
+        console.log("CategorieForm is geüpdated");
+    }
+    //Wijziging in inputveld
+    handleChange = (naam, waarde) => {
+        //Voorbeeld van callback die wordt uitgevoerd na setState()
+        this.setState({ [naam]: waarde }, () => console.log(this.state));
+    }
+    //informatie doorsturen naar parent
+    handleSubmit = (event) => {
         this.props.onSubmit(this.state.id, this.state.naam);
         event.preventDefault(); // geen roundtrip naar server
     }
     render() {
         const idItem = { naam: "id", waarde: this.state.id };
-        const naamItem ={ naam: "naam", waarde: this.state.naam };
+        const naamItem = { naam: "naam", waarde: this.state.naam };
         return (
             <form className={this.props.className} onSubmit={this.handleSubmit}>
                 <TekstInputVeld item={idItem} onChange={this.handleChange} />
-                <TekstInputVeld item={naamItem} onChange={this.handleChange}/>
-                <input type="submit" value="versturen"/>
+                <TekstInputVeld item={naamItem} onChange={this.handleChange} />
+                <input type="submit" value="versturen" />
             </form>
         )
     }
