@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Categorie} from './vb2';
-import InputForm from './vb5';
+import CategorieForm from './vb6';
 
 
 
@@ -13,20 +13,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorieen: [],
-      enabled: true
+      initialId: '',
+      initialNaam: ''
     }
   }
-  aanpassen = () => {
-    console.log("Lijst wordt aangepast");
-    const numitems = this.state.categorieen.length;
 
-    this.setState({ categorieen: this.state.categorieen.concat(App.categorieen[numitems]) });
-    this.setState({ 
-     categorieen: this.state.categorieen.concat(App.categorieen[numitems]),
-     enabled: numitems < App.categorieen.length-1
-    });
-  }
   componentDidMount() {
     console.log("App is geladen");
   }
@@ -36,10 +27,15 @@ class App extends Component {
   componentDidUpdate() {
     console.log("App is geüpdated");
   }
+  handleSubmit= (id, naam) => {
+    alert(`id=${id}, naam=${naam}`);
+    this.setState({initialId:'', initialNaam:''});
+  }
   render() {
 
     return (
-      <InputForm />
+      <CategorieForm className="m-2" initialId={this.state.initialId} initialNaam={this.state.initialNaam} 
+                     onSubmit={this.handleSubmit}/>
     );
   }
 }
