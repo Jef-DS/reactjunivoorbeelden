@@ -24,6 +24,7 @@ class CategorieLijst extends Component {
         return (
             <div className="row">
                 <div className="col-4">
+                    {/* Het onClick attribuut van JSX komt overeen met onClick van het DOM */}
                     <button className="btn btn-info" 
                             onClick={this.props.handler} 
                             disabled={!this.props.buttonEnabled}>Categorie toevoegen</button>
