@@ -1,43 +1,26 @@
 import React, { Component } from 'react';
-import {Categorie} from './vb2';
-import CategorieForm from './vb6';
+import OpleidingForm,{Categorie} from './vb7';
 
 
 
 class App extends Component {
+  //opgelet: definitie van de Categorie class is gewijzigd in vb7
   static categorieen = [
     new Categorie("PL", "Programmeertalen"),
     new Categorie("OS", "Besturingssystemen"),
     new Categorie("DB", "Databanken")
   ];
-  constructor(props) {
-    super(props);
-    this.state = {
-      initialId: '',
-      initialNaam: ''
-    }
-  }
 
-  componentDidMount() {
-    console.log("App is geladen");
-  }
-  componentWillUnmount() {
-    console.log("App wordt ontladen");
-  }
-  componentDidUpdate() {
-    console.log("App is geüpdated");
-  }
+
   // gewijzigde data 'vloeit' terug naar hier
-  handleSubmit= (id, naam) => {
-    alert(`id=${id}, naam=${naam}`);
-    // reset inputvelden
-    this.setState({initialId:'', initialNaam:''});
+  handleSubmit= (id, naam, categorieen) => {
+    console.log(id, naam, categorieen);
   }
   render() {
 
     return (
-      <CategorieForm className="m-2" initialId={this.state.initialId} initialNaam={this.state.initialNaam} 
-                     onSubmit={this.handleSubmit}/>
+      <OpleidingForm className="m-2" opties={App.categorieen}
+                    onSubmit={this.handleSubmit} />
     );
   }
 }
